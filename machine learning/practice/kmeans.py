@@ -16,7 +16,6 @@ class KMeans:
         self.centroids = {tuple(data):[] for data in self.data[c_idx, :]}
         
     def fit(self):
-        self.c_to_p = {c:[] for c in self.centroids}
         while True:
             for p in self.data:
                 min_d = float('inf')
@@ -38,7 +37,7 @@ class KMeans:
             
         return self.centroids
     
-    def elbow(self, ):
+    def elbow(self):
         self.SSE = [0 for i in range(20)]
         for k in range(1, 20):
             self.initialize(k)
@@ -71,7 +70,6 @@ class KMeans:
         plt.scatter(self.data[:, 0], self.data[:, 1], color=cmap(norm(colors)))
         plt.tight_layout()
         plt.show()
-        plt.close()
         
             
 class DataGeneration:
