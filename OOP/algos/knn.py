@@ -13,10 +13,10 @@ def loadData():
 class KNN:
     def __init__(self, data, k):
         self.data = data.sample(frac=1)
-        self.features = self.data[['seplen',  'sepwid',  'petlen',  'petwid']]
         self.k = int(k)
         
     def scale(self):
+        self.features = self.data[['seplen',  'sepwid',  'petlen',  'petwid']]
         self.min = self.features.min()
         self.max = self.features.max()
         self.data[['seplen',  'sepwid',  'petlen',  'petwid']] = (self.features - self.min) / (self.max - self.min)
@@ -42,16 +42,16 @@ class KNN:
         acc = []
         for k in self.k_splits:
             correct = 0
-            test = self.k_splits[k][0]
-            train = self.k_splits[k][1]
-            train = self.data.iloc[train]
-            for ind in test:
+            test_idx = self.k_splits[k][0]
+            train_idx = self.k_splits[k][1]
+            train = self.data.iloc[train_idx]
+            for ind in test_idx:
                 point = self.data.iloc[ind]
                 pred = self.predict(train, point)
                 if int(pred) == int(point[['label']].values):
                     correct += 1       
                     
-            acc.append(correct/len(test))
+            acc.append(correct/len(test_idx))
             
         print('\nAccuracy for each fold:\n', acc)
         
