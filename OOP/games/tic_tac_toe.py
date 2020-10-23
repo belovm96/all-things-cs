@@ -1,6 +1,5 @@
 """
 Tic-Tac-Toe
-
 @belovm96
 """
 import random 
