@@ -1,10 +1,7 @@
 """
 Connect-Four
-
 @belovm96
 """
-# attempt 3 classes
-# Board
 import random
 
 class Board:
